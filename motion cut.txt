@@ -1,0 +1,64 @@
+import java.util.Arrays;
+
+public class QuizQuestion {
+    private String questionText;
+    private String[] options;
+    private int correctAnswerIndex;
+    private int totalScore;
+
+    public QuizQuestion(String questionText, String[] options, int correctAnswerIndex) {
+        this.questionText = questionText;
+        this.options = options;
+        this.correctAnswerIndex = correctAnswerIndex;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    public boolean isCorrect(int userAnswerIndex) {
+        boolean correct = userAnswerIndex == correctAnswerIndex;
+        if (correct) {
+            totalScore++; // Increment the score if the answer is correct
+        }
+        return correct;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public static void main(String[] args) {
+        // Example questions
+        QuizQuestion question1 = new QuizQuestion("What is the capital of France?", new String[]{"London", "Paris", "Berlin", "Madrid"}, 1);
+        QuizQuestion question2 = new QuizQuestion("What is the largest mammal?", new String[]{"Elephant", "Blue Whale", "Giraffe", "Horse"}, 1);
+
+        // Array of questions
+        QuizQuestion[] questions = {question1, question2};
+
+        // Display and answer each question
+        for (QuizQuestion quizQuestion : questions) {
+            System.out.println("Question: " + quizQuestion.getQuestionText());
+            System.out.println("Options: " + Arrays.toString(quizQuestion.getOptions()));
+
+            // Simulate user input (choosing an option)
+            int userAnswerIndex = 1; // User chooses the second option (index 1)
+
+            // Check if the user's answer is correct
+            if (quizQuestion.isCorrect(userAnswerIndex)) {
+                System.out.println("Correct!");
+            } else {
+                System.out.println("Incorrect. The correct answer is: " + quizQuestion.getOptions()[quizQuestion.correctAnswerIndex]);
+            }
+
+            System.out.println(); // Add a line break for better readability
+        }
+
+        // Display total score
+        System.out.println("Total Score: " + questions[0].getTotalScore());
+    }
+}
